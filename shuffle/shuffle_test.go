@@ -46,6 +46,24 @@ func makeAZ() []string {
 }
 
 func TestShuffle(t *testing.T) {
+	var slice []string
+	sort.Sort(sort.StringSlice(slice))
+	Shuffle(sort.StringSlice(slice))
+
+	slice = []string{}
+	sort.Sort(sort.StringSlice(slice))
+	Shuffle(sort.StringSlice(slice))
+	if len(slice) != 0 {
+		t.Fail()
+	}
+
+	slice = []string{"A"}
+	sort.Sort(sort.StringSlice(slice))
+	Shuffle(sort.StringSlice(slice))
+	if len(slice) != 1 || slice[0] != "A" {
+		t.Fail()
+	}
+
 	const checks = 10
 	shuffled := 0
 	for i := 0; i < checks; i++ {
