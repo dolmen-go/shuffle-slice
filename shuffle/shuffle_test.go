@@ -20,16 +20,13 @@ import (
 	"fmt"
 	"math/rand"
 	"sort"
+	"strings"
 	"testing"
 	"time"
 )
 
 // shuffle.Interface is a subset of sort.Interface
 var _ Interface = sort.Interface(nil)
-
-func init() {
-	rand.Seed(time.Now().UTC().UnixNano())
-}
 
 func fillAZ(az []string) {
 	b := []byte{65}
@@ -45,7 +42,33 @@ func makeAZ() []string {
 	return az[:]
 }
 
-func TestShuffle(t *testing.T) {
+// Test with a fixed seed
+func TestShuffle_Fixed(t *testing.T) {
+	rand.Seed(0x12345678)
+
+	az := makeAZ()
+	expected := []string{
+		`ABCDEFGHIJKLMNOPQRSTUVWXYZ`,
+		`SBELKZFXVURMNJPAGOWHYTIDQC`,
+		`RPYFTKDWAVLNBEOSQGJHXUCMIZ`,
+		`WPCANDBXQHRLEYKTSFUJIGZOVM`,
+		`SWLGNUMIFQVARPYTDKCEBOHXJZ`,
+		`GCMFRQVIHJNOPLAWUDSEXTZBKY`,
+	}
+
+	for i := 0; i < len(expected); i++ {
+		s := strings.Join(az, ``)
+		t.Log(expected[i])
+		if s != expected[i] {
+			t.Errorf("\n     Got: %v\nExpected:%v\n", s, expected[i])
+		}
+		Shuffle(sort.StringSlice(az))
+	}
+}
+
+func TestShuffle_Random(t *testing.T) {
+	rand.Seed(time.Now().UnixNano())
+
 	var slice []string
 	sort.Sort(sort.StringSlice(slice))
 	Shuffle(sort.StringSlice(slice))
@@ -84,6 +107,8 @@ func TestShuffle(t *testing.T) {
 }
 
 func ExampleShuffle() {
+	rand.Seed(time.Now().UnixNano())
+
 	af := sort.StringSlice([]string{"A", "B", "C", "D", "E", "F"})
 	fmt.Println("Original: %v", af)
 
