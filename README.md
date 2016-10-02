@@ -1,4 +1,4 @@
-# go-shuffle-slices
+# github.com/dolmen-go/shuffle-slice
 
 Shuffle slices as you sort them.
 
@@ -7,7 +7,7 @@ Example:
 package main
 
 import (
-    "github.com/dolmen/go-shuffle-slice/shuffle"
+    "github.com/dolmen-go/shuffle-slice/shuffle"
     "fmt"
     "sort"
 )
