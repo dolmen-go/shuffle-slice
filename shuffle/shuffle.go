@@ -14,6 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// Package shuffle allows to shuffle a slice using the sort.Interface.
+//
+// See also https://golang.org/pkg/math/rand/#Shuffle (go 1.10).
 package shuffle
 
 import "math/rand"
@@ -30,6 +33,8 @@ type Interface interface {
 // sort.Interface)
 //
 // Note: it may happen that the result satisfies sort.IsSorted(data)
+//
+// See also https://golang.org/pkg/math/rand/#Shuffle (go 1.10).
 func Shuffle(data Interface) {
 	n := data.Len()
 	if n <= 1 {
