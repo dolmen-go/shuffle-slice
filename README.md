@@ -18,3 +18,23 @@ func main() {
     fmt.Println(slice)
 }
 ```
+
+
+Note: since go1.10, the package `math/rand` has a function [`Shuffle`](https://golang.org/pkg/math/rand/#Shuffle):
+
+```go
+package main
+
+import (
+    "fmt"
+    "math/rand"
+)
+
+func main() {
+    slice := []string{"foo", "bar", "baz"}
+    rand.Shuffle(len(slice), func(i, j int) {
+    	slice[i], slice[j] = slice[j], slice[i]
+    })
+    fmt.Println(slice)
+}
+```
