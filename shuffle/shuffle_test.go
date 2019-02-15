@@ -110,11 +110,11 @@ func ExampleShuffle() {
 	rand.Seed(time.Now().UnixNano())
 
 	af := sort.StringSlice([]string{"A", "B", "C", "D", "E", "F"})
-	fmt.Println("Original: %v", af)
+	fmt.Printf("Original: %v\n", af)
 
 	Shuffle(af)
-	fmt.Println("Shuffled: %v", af)
+	fmt.Printf("Shuffled: %v\n", af)
 
 	sort.Sort(af)
-	fmt.Println("  Sorted: %v", af)
+	fmt.Printf("  Sorted: %v\n", af)
 }
